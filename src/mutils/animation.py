@@ -674,7 +674,8 @@ class Animation(mutils.Pose):
                 maya.cmds.select(validCurves)
                 logger.info("Saving animation: %s" % mayaPath)
                 maya.cmds.file(mayaPath, force=True, options='v=0', type=fileType, uiConfiguration=False, exportSelected=True)
-                self.cleanMayaFile(mayaPath)
+                if fileType != "mayaBinary":
+                    self.cleanMayaFile(mayaPath)
 
         finally:
             if bakeConnected:
