@@ -909,7 +909,7 @@ def readJson(path):
     logger.debug(u'Reading json file: {0}'.format(path))
 
     data = read(path) or "{}"
-    data = json.loads(data)
+    data = json.loads(data, object_pairs_hook=collections.OrderedDict)
 
     return data
 
@@ -986,7 +986,7 @@ def replaceJson(path, old, new, count=-1):
 
     data = read(path) or "{}"
     data = data.replace(old, new, count)
-    data = json.loads(data)
+    data = json.loads(data, object_pairs_hook=collections.OrderedDict)
 
     saveJson(path, data)
 
